@@ -26,14 +26,20 @@
     <span id="letters">Guesses So Far:</span>
 
     <script>
-        var compicks = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
         var wins = 0;
         var losses = 0;
         var guesslft = 9;
         var usdlttr = [];
-
-
-        var compicks = compicks[Math.floor(Math.random() * compicks.length)];
+        var gameOver = false;
+        var computerPick = "";
+     
+        var compicks = function chooseRandomLetter () {
+            var randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+            console.log(randomLetter);
+            computerPick = randomLetter;
+        }
+        compicks();
 
         function countguesslft() {
             document.querySelector("#guessleft").innerHTML = "Guesses Left: " + guesslft;
@@ -43,33 +49,37 @@
             document.querySelector("#letters").innerHTML = "Guesses So Far: " + usdlttr.join("");
         }
 
-        function countguesslft(){}
+        countguesslft()
 
         function restart() {
-            guessesLeft = 10;
+            guesslft = 10;
+            countguesslft();
             usdlttr = [];
-            var compicks = compicks[Math.floor(Math.random() * compicks.length)];
+            unicorn();
+            compicks();
         }
 
         document.onkeyup = function (event) {
-            guesslft--;
-
             var letterguess = String.fromCharCode(event.keyCode).toLowerCase();
-
+console.log("letterguess is: " + letterguess);
             usdlttr.push(letterguess);
             countguesslft();
             unicorn();
 
-            if (guesslft === compicks) {
+            if (letterguess === computerPick) {
                 wins++;
                 document.querySelector("#wins").innerHTML = "Wins: " + wins;
                 restart();
+            }  else if  (guesslft > 0) {
+                guesslft--;
+                countguesslft()
             }
-            else if (guesslft === 0) {
+            else {
                 losses++;
                 document.querySelector("#losses").innerHTML = "Loses: " + losses;
                 restart();
             }
+            
 
 
         };
