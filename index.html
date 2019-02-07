@@ -40,7 +40,7 @@
         }
 
         function unicorn() {
-            document.querySelector("#letters").innerHTML = "Your Guesses so far: " + letterUser.join(' ');
+            document.querySelector("#letters").innerHTML = "Guesses So Far: " + usdlttr.join("");
         }
 
         function countguesslft(){}
@@ -56,9 +56,7 @@
 
             var letterguess = String.fromCharCode(event.keyCode).toLowerCase();
 
-            console.log(typeof usdlttr)
-
-            unicorn.push(letterguess);
+            usdlttr.push(letterguess);
             countguesslft();
             unicorn();
 
