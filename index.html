@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1>The Psychic Game</h1>
+    <span>Guess what letter I'm thinking of.</span>
+    <br>
+    <br>
+    <span id="wins">Wins:</span>
+    <br>
+    <br>
+    <span id="losses">Losses:</span>
+    <br>
+    <br>
+    <span id="guessleft">Guesses Left:</span>
+    <br>
+    <br>
+    <span id="letters">Guesses So Far:</span>
+
+    <script>
+        var compicks = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        var wins = 0;
+        var losses = 0;
+        var guesslft = 9;
+        var usdlttr = [];
+
+
+        var compicks = compicks[Math.floor(Math.random() * compicks.length)];
+
+        function countguesslft() {
+            document.querySelector("#guessleft").innerHTML = "Guesses Left: " + guesslft;
+        }
+
+        function unicorn() {
+            document.querySelector("#letters").innerHTML = "Your Guesses so far: " + letterUser.join(' ');
+        }
+
+        function countguesslft(){}
+
+        function restart() {
+            guessesLeft = 10;
+            usdlttr = [];
+            var compicks = compicks[Math.floor(Math.random() * compicks.length)];
+        }
+
+        document.onkeyup = function (event) {
+            guesslft--;
+
+            var letterguess = String.fromCharCode(event.keyCode).toLowerCase();
+
+            console.log(typeof usdlttr)
+
+            unicorn.push(letterguess);
+            countguesslft();
+            unicorn();
+
+            if (guesslft === compicks) {
+                wins++;
+                document.querySelector("#wins").innerHTML = "Wins: " + wins;
+                restart();
+            }
+            else if (guesslft === 0) {
+                losses++;
+                document.querySelector("#losses").innerHTML = "Loses: " + losses;
+                restart();
+            }
+
+
+        };
+    </script>
+</body>
+
+</html>
